@@ -59,15 +59,20 @@ class Account:
 
 
 def main():
-    test_account = Account("Jeff", "Garlan")
+    test_account = Account("Jeff", "Garlin")
     print(test_account)
-    test_account.deposit(10000)
-    test_account.deposit(50)
-    test_account.withdraw(25)
-    test_account.withdraw(10)
+
     test_account.set_date("10/01/2023")
-    test_account.withdraw(1000)
+    test_account.deposit(1000)
+
+    test_account.set_date("13/01/2023")
+    test_account.deposit(2000)
+
+    test_account.set_date("14/01/2023")
+    test_account.deposit(500)
+
     test_account.print_statement()
+    print(test_account)
 
 
 if __name__ == '__main__':
