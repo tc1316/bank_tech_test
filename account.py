@@ -15,16 +15,14 @@ class Account:
         return f"{self.forename} {self.surname} - Outstanding balance: {(self.__balance / 100):.2f} - Date: {self.date}"
 
     def deposit(self, amount):
-        amount = abs(amount)
-        amount *= 100
+        amount = abs(amount)*100
         self.__balance += amount
         self.__statement_generator(amount, entry_type="deposit")
         return self.__balance
 
     def withdraw(self, amount):
-        amount = abs(amount)
+        amount = abs(amount)*100
         if self.__balance - amount >= 0:
-            amount *= 100
             self.__balance -= amount
             self.__statement_generator(amount, entry_type="withdraw")
             return self.__balance
