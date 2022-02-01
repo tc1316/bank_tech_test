@@ -52,11 +52,7 @@ class Account:
             raise TypeError("Needs to be a deposit or withdrawal")
 
     def __compile_statement(self):
-        str = ""
-        for i in range(len(self.statement) - 1, -1, -1):
-            str += f"{self.statement[i]}\n"
-        return str
-
+        return "\n".join(self.statement[::-1])
 
 def main():
     test_account = Account("Jeff", "Garlin")
