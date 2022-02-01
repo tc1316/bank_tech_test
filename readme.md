@@ -1,23 +1,20 @@
-## Specification
+## Requirements
+- Python 3.8+
+- Coverage.py (https://coverage.readthedocs.io/en/6.3/)
+- Modules: unittest, datetime, dataclasses, typing
 
-### Requirements
+## Running tests
+- From root: "coverage run -m test_account"
+- To check coverage: "coverage report"
 
-* You should be able to interact with your code via a REPL like IRB or Node.  (You don't need to implement a command line interface that takes input from STDIN.)
-* Deposits, withdrawal.
-* Account statement (date, amount, balance) printing.
-* Data can be kept in memory (it doesn't need to be stored to a database or anything).
+----
 
-### Acceptance criteria
-
-**Given** a client makes a deposit of 1000 on 10-01-2023  
-**And** a deposit of 2000 on 13-01-2023  
-**And** a withdrawal of 500 on 14-01-2023  
-**When** she prints her bank statement  
-**Then** she would see
-
-```
-date || credit || debit || balance
-14/01/2023 || || 500.00 || 2500.00
-13/01/2023 || 2000.00 || || 3000.00
-10/01/2023 || 1000.00 || || 1000.00
-```
+# Approach
+- Used a dataclass to encapsulate attributes of an account as syntax is neater
+- Set default date to today; created a set_date method to allow for testing other dates
+- Deposit and withdraw methods separated instead of using a common function to prevent confusion 
+  - Deposit and withdraw methods call private method to create new element in statement list
+- Print_statement method prints the statement list in reverse order to the terminal with a header 
+  - Header printed separately otherwise creating new elements would require insertion at the -2 position
+- Balance stored in pence to prevent floating point rounding errors
+  - User still inputs in pounds however, the value is multiplied by 100 when stored in balance but divided by 100 (float division) when printing
