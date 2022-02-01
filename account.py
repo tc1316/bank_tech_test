@@ -18,7 +18,7 @@ class Account:
         amount = abs(amount)
         amount *= 100
         self.__balance += amount
-        self.__entry_generator(amount, entry_type="deposit")
+        self.__statement_generator(amount, entry_type="deposit")
         return self.__balance
 
     def withdraw(self, amount):
@@ -26,7 +26,7 @@ class Account:
         if self.__balance - amount >= 0:
             amount *= 100
             self.__balance -= amount
-            self.__entry_generator(amount, entry_type="withdraw")
+            self.__statement_generator(amount, entry_type="withdraw")
             return self.__balance
         else:
             raise ValueError("Insufficient funds")
@@ -42,7 +42,7 @@ class Account:
             print(self.statement[i])
 
     # Private method
-    def __entry_generator(self, amount, entry_type=None):
+    def __statement_generator(self, amount, entry_type=None):
         if entry_type == "deposit":
             self.statement.append(
                 f"{self.date} || {(amount / 100):.2f} || || {(self.__balance / 100):.2f}")
@@ -53,17 +53,17 @@ class Account:
             raise TypeError("Needs to be a deposit or withdrawal")
 
 
-def main():
-    test_account = Account("Jeff", "Garlan")
-    print(test_account)
-    test_account.deposit(10000)
-    test_account.deposit(50)
-    test_account.withdraw(25)
-    test_account.withdraw(10)
-    test_account.set_date("10/01/2023")
-    test_account.withdraw(1000)
-    test_account.print_statement()
+# def main():
+#     test_account = Account("Jeff", "Garlan")
+#     print(test_account)
+#     test_account.deposit(10000)
+#     test_account.deposit(50)
+#     test_account.withdraw(25)
+#     test_account.withdraw(10)
+#     test_account.set_date("10/01/2023")
+#     test_account.withdraw(1000)
+#     test_account.print_statement()
 
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()
