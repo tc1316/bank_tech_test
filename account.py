@@ -37,9 +37,8 @@ class Account:
         return self.date
 
     def print_statement(self):
-        print('date || credit || debit || balance')
-        for i in range(len(self.statement) - 1, -1, -1):
-            print(self.statement[i])
+        print(
+            f"date || credit || debit || balance\n{self.__compile_statement()}")
 
     # Private method
     def __statement_generator(self, amount, entry_type=None):
@@ -52,18 +51,24 @@ class Account:
         else:
             raise TypeError("Needs to be a deposit or withdrawal")
 
-
-# def main():
-#     test_account = Account("Jeff", "Garlan")
-#     print(test_account)
-#     test_account.deposit(10000)
-#     test_account.deposit(50)
-#     test_account.withdraw(25)
-#     test_account.withdraw(10)
-#     test_account.set_date("10/01/2023")
-#     test_account.withdraw(1000)
-#     test_account.print_statement()
+    def __compile_statement(self):
+        str = ""
+        for i in range(len(self.statement) - 1, -1, -1):
+            str += f"{self.statement[i]}\n"
+        return str
 
 
-# if __name__ == '__main__':
-#     main()
+def main():
+    test_account = Account("Jeff", "Garlan")
+    print(test_account)
+    test_account.deposit(10000)
+    test_account.deposit(50)
+    test_account.withdraw(25)
+    test_account.withdraw(10)
+    test_account.set_date("10/01/2023")
+    test_account.withdraw(1000)
+    test_account.print_statement()
+
+
+if __name__ == '__main__':
+    main()
