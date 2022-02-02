@@ -1,7 +1,7 @@
 # Bank Tech Test
 First practice of a tech test with the aim of polishing OOD and TDD
 
-----
+-----
 ## Requirements
 - Python 3.8+ (https://www.python.org/downloads/)
 - Pip 22.0.2+ (https://pip.pypa.io/en/stable/installation/)
