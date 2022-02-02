@@ -16,13 +16,13 @@ class Account:
         return f"{self.forename} {self.surname} - Outstanding balance: {(self.__balance / 100):.2f} - Date: {self.date}"
 
     def deposit(self, amount):
-        amount = abs(amount)*100
+        amount = abs(amount) * 100
         self.__balance += amount
         self.__transaction_generator(amount, transaction_type="deposit")
         return self.__balance
 
     def withdraw(self, amount):
-        amount = abs(amount)*100
+        amount = abs(amount) * 100
         if self.__balance - amount >= 0:
             self.__balance -= amount
             self.__transaction_generator(amount, transaction_type="withdraw")
@@ -36,27 +36,26 @@ class Account:
         return self.date
 
     def __transaction_generator(self, amount, transaction_type=None):
-        if transaction_type == None:
+        if transaction_type is None:
             raise TypeError("Needs to be a deposit or withdrawal")
-        self.statement.append({ "date": self.date, "amount": amount, "balance": self.__balance, "transaction_type": transaction_type})
+        self.statement.append({"date": self.date,
+                               "amount": amount,
+                               "balance": self.__balance,
+                               "transaction_type": transaction_type})
+
+
 class StatementPrinter:
     def parse_transactions(self, account: Account):
         statement = []
         for t in account.statement:
             if t['transaction_type'] == "deposit":
-                statement.append(f"{t['date']} || {(t['amount'] / 100):.2f} || || {(t['balance'] / 100):.2f}")
+                statement.append(
+                    f"{t['date']} || {(t['amount'] / 100):.2f} || || {(t['balance'] / 100):.2f}")
             elif t['transaction_type'] == "withdraw":
-                statement.append(f"{t['date']} || || {(t['amount'] / 100):.2f} || {(t['balance'] / 100):.2f}")
+                statement.append(
+                    f"{t['date']} || || {(t['amount'] / 100):.2f} || {(t['balance'] / 100):.2f}")
         return "\n".join(statement[::-1])
 
     def print_statement(self, account: Account):
-        print(f"date || credit || debit || balance\n{self.parse_transactions(account)}")
-
-        
-
-    
-
-
-
-
-    
+        print(
+            f"date || credit || debit || balance\n{self.parse_transactions(account)}")
