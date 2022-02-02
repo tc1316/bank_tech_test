@@ -1,6 +1,5 @@
 from datetime import date, datetime
 from dataclasses import dataclass, field
-from email.utils import parsedate_to_datetime
 from typing import List
 
 

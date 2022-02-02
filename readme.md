@@ -20,9 +20,17 @@ First practice of a tech test with the aim of polishing OOD and TDD
 
 ----
 ## Running tests
-- From root: "coverage run -m test_account"
+- Run "coverage run -m test_account"
+- Run "coverage run -m test_statement_printer"
 - To check coverage: "coverage report"
 
 ## Running code 
-- From root: "python account.py"
-- TBC
+- Run "python account.py" from root
+- You should see:
+```
+date || credit || debit || balance
+14/01/2023 || || 500.00 || 2500.00
+13/01/2023 || 2000.00 || || 3000.00
+10/01/2023 || 1000.00 || || 1000.00
+```
+
