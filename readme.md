@@ -19,13 +19,13 @@ First practice of a tech test with the aim of polishing OOD and TDD
   - User still inputs in pounds however, the value is multiplied by 100 when stored in balance but divided by 100 (float division) when printing
 
 ----
-## Running tests
+## Running tests (from root)
 - Run "coverage run -m test_account"
 - Run "coverage run -m test_statement_printer"
 - To check coverage: "coverage report"
 
-## Running code 
-- Run "python account.py" from root
+## Running code (from root)
+- Run "python main.py"
 - You should see:
 ```
 date || credit || debit || balance
