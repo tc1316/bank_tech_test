@@ -1,5 +1,6 @@
 from datetime import date, datetime
 from dataclasses import dataclass, field
+from email.utils import parsedate_to_datetime
 from typing import List
 
 
@@ -17,14 +18,14 @@ class Account:
     def deposit(self, amount):
         amount = abs(amount)*100
         self.__balance += amount
-        self.__statement_generator(amount, entry_type="deposit")
+        self.__transaction_generator(amount, transaction_type="deposit")
         return self.__balance
 
     def withdraw(self, amount):
         amount = abs(amount)*100
         if self.__balance - amount >= 0:
             self.__balance -= amount
-            self.__statement_generator(amount, entry_type="withdraw")
+            self.__transaction_generator(amount, transaction_type="withdraw")
             return self.__balance
         else:
             raise ValueError("Insufficient funds")
@@ -34,40 +35,28 @@ class Account:
             new_date, '%d/%m/%Y').strftime('%d/%m/%Y')
         return self.date
 
-    def print_statement(self):
-        print(
-            f"date || credit || debit || balance\n{self.__compile_statement()}")
-
-    # Private method
-    def __statement_generator(self, amount, entry_type=None):
-        if entry_type == "deposit":
-            self.statement.append(
-                f"{self.date} || {(amount / 100):.2f} || || {(self.__balance / 100):.2f}")
-        elif entry_type == "withdraw":
-            self.statement.append(
-                f"{self.date} || || {(amount / 100):.2f} || {(self.__balance / 100):.2f}")
-        else:
+    def __transaction_generator(self, amount, transaction_type=None):
+        if transaction_type == None:
             raise TypeError("Needs to be a deposit or withdrawal")
+        self.statement.append({ "date": self.date, "amount": amount, "balance": self.__balance, "transaction_type": transaction_type})
+class StatementPrinter:
+    def parse_transactions(self, account: Account):
+        statement = []
+        for t in account.statement:
+            if t['transaction_type'] == "deposit":
+                statement.append(f"{t['date']} || {(t['amount'] / 100):.2f} || || {(t['balance'] / 100):.2f}")
+            elif t['transaction_type'] == "withdraw":
+                statement.append(f"{t['date']} || || {(t['amount'] / 100):.2f} || {(t['balance'] / 100):.2f}")
+        return "\n".join(statement[::-1])
 
-    def __compile_statement(self):
-        return "\n".join(self.statement[::-1])
+    def print_statement(self, account: Account):
+        print(f"date || credit || debit || balance\n{self.parse_transactions(account)}")
 
-def main():
-    test_account = Account("Jeff", "Garlin")
-    print(test_account)
+        
 
-    test_account.set_date("10/01/2023")
-    test_account.deposit(1000)
-
-    test_account.set_date("13/01/2023")
-    test_account.deposit(2000)
-
-    test_account.set_date("14/01/2023")
-    test_account.deposit(500)
-
-    test_account.print_statement()
-    print(test_account)
+    
 
 
-if __name__ == '__main__':
-    main()
+
+
+    
