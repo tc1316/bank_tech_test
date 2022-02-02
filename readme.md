@@ -18,6 +18,11 @@ First practice of a tech test with the aim of polishing OOD and TDD
 - Balance stored in pence to prevent floating point rounding errors
   - User still inputs in pounds however, the value is multiplied by 100 when stored in balance but divided by 100 (float division) when printing
 
+**POST-REVIEW CHANGES**
+- Refactored account class into 2; statement_printer class instance handles the parsing/formatting/printing of the statement information held in the account instance
+- account instances now store transactions as a list of dictionaries for cleaner reading
+- account class mocked in tests for statement_printer
+
 ----
 ## Running tests (from root)
 - Run "coverage run -m test_account"
