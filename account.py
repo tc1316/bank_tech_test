@@ -35,7 +35,7 @@ class Account:
             new_date, '%d/%m/%Y').strftime('%d/%m/%Y')
         return self.date
 
-    def __transaction_generator(self, amount, transaction_type=None):
+    def __transaction_generator(self, amount, transaction_type: str = None):
         if transaction_type is None:
             raise TypeError("Needs to be a deposit or withdrawal")
         self.statement.append({"date": self.date,
@@ -46,15 +46,15 @@ class Account:
 
 class StatementPrinter:
     def parse_transactions(self, account: Account):
-        statement = []
+        parsed_statement = []
         for t in account.statement:
             if t['transaction_type'] == "deposit":
-                statement.append(
+                parsed_statement.append(
                     f"{t['date']} || {(t['amount'] / 100):.2f} || || {(t['balance'] / 100):.2f}")
             elif t['transaction_type'] == "withdraw":
-                statement.append(
+                parsed_statement.append(
                     f"{t['date']} || || {(t['amount'] / 100):.2f} || {(t['balance'] / 100):.2f}")
-        return "\n".join(statement[::-1])
+        return "\n".join(parsed_statement[::-1])
 
     def print_statement(self, account: Account):
         print(

@@ -3,7 +3,7 @@ from account import Account
 from datetime import date
 
 
-class TestCalc(unittest.TestCase):
+class TestAccount(unittest.TestCase):
     def setUp(self):
         self.client = Account(
             forename='Sue',
@@ -52,20 +52,6 @@ class TestCalc(unittest.TestCase):
         self.assertEqual(
             self.client.__str__(),
             "Sue Smith - Outstanding balance: 96.12 - Date: 10/01/2023")
-
-    def test_statement(self):
-        self.assertEqual(self.client.statement, [])
-
-        self.client.deposit(96.12)
-        self.assertEqual(
-            self.client.statement,
-            [f"{date.today().strftime('%d/%m/%Y')} || 96.12 || || 96.12"])
-
-        self.client.set_date("10/01/2023")
-        self.client.withdraw(23.59)
-        self.assertEqual(self.client.statement,
-                         [f"{date.today().strftime('%d/%m/%Y')} || 96.12 || || 96.12",
-                          '10/01/2023 || || 23.59 || 72.53'])
 
 
 if __name__ == '__main__':
