@@ -1,13 +1,12 @@
-## Requirements
-- Python 3.8+
-- Coverage.py (https://coverage.readthedocs.io/en/6.3/)
-- Modules: unittest, datetime, dataclasses, typing
-
-## Running tests
-- From root: "coverage run -m test_account"
-- To check coverage: "coverage report"
+# Bank Tech Test
+First practice of a tech test with the aim of polishing OOD and TDD
 
 ----
+## Requirements
+- Python 3.8+ (https://www.python.org/downloads/)
+- Pip 22.0.2+ (https://pip.pypa.io/en/stable/installation/)
+- Coverage.py (https://coverage.readthedocs.io/en/6.3/)
+- Modules (part of Python Standard Library): unittest, datetime, dataclasses, typing
 
 # Approach
 - Used a dataclass to encapsulate attributes of an account as syntax is neater
@@ -18,3 +17,12 @@
   - Header printed separately otherwise creating new elements would require insertion at the -2 position
 - Balance stored in pence to prevent floating point rounding errors
   - User still inputs in pounds however, the value is multiplied by 100 when stored in balance but divided by 100 (float division) when printing
+
+----
+## Running tests
+- From root: "coverage run -m test_account"
+- To check coverage: "coverage report"
+
+## Running code 
+- From root: "python account.py"
+- TBC

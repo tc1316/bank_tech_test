@@ -59,12 +59,12 @@ class TestCalc(unittest.TestCase):
         self.client.deposit(96.12)
         self.assertEqual(
             self.client.statement,
-            ['01/02/2022 || 96.12 || || 96.12'])
+            [f"{date.today().strftime('%d/%m/%Y')} || 96.12 || || 96.12"])
 
         self.client.set_date("10/01/2023")
         self.client.withdraw(23.59)
         self.assertEqual(self.client.statement,
-                         ['01/02/2022 || 96.12 || || 96.12',
+                         [f"{date.today().strftime('%d/%m/%Y')} || 96.12 || || 96.12",
                           '10/01/2023 || || 23.59 || 72.53'])
 
 
